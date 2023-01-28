@@ -1,11 +1,10 @@
 package com.pegbeer.paymentsappapi.model
 
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 
-@Serializable
 @Document(collection = "payment")
 data class Payment(
     @Id
@@ -13,5 +12,6 @@ data class Payment(
     var number:Int = 0,
     var name:String = "",
     var month:Int = 0,
+    @get:JsonProperty("isPaid")
     var isPaid:Boolean = false
 )

@@ -20,8 +20,9 @@ class PaymentController(private val paymentService: PaymentService) {
     }
 
     @RequestMapping(value = ["/payments"], method = [RequestMethod.GET])
-    fun getPayments():List<Payment>{
-        return paymentService.getPayments()
+    fun getPayments():Result<List<Payment>?>{
+        val res = paymentService.getPayments() ?: return Result.error("Could not retrieve the payment list")
+        return Result.success(res)
     }
 
     @RequestMapping(value = ["/payments"], method = [RequestMethod.PUT])
